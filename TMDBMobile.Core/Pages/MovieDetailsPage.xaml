@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:controls="clr-namespace:TMDBMobile.Core.Controls"
+             Title="{Binding Movie.Title}" 
+             x:Class="TMDBMobile.Core.Pages.MovieDetailsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="0">
+
+                <ffimageloading:CachedImage Source="{Binding Movie.PosterPath, Converter={StaticResource PosterPathConverter}}"
+                                            CacheDuration="1" 
+                                            LoadingPlaceholder="poster_placeholder" ErrorPlaceholder="poster_placeholder" 
+                                            Aspect="AspectFit"
+                                            Margin="0,0,0,8"/>
+
+                <StackLayout Spacing="0">
+                    <BoxView Style="{StaticResource SeparatorLineStyle}"
+                             IsVisible="{Binding IsAuthenticated}"/>
+
+                    <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="Center" HeightRequest="44"
+                                 IsVisible="{Binding IsAuthenticated}">
+                        <FlexLayout Direction="Row" JustifyContent="SpaceEvenly" 
+                                    HorizontalOptions="Fill" 
+                                    IsVisible="{Binding IsLoadingDetails, Converter={StaticResource InvertBoolConverter}}">
+                            <controls:ImageButton Image="{Binding IsFavorite, Converter={StaticResource FavoriteIconConverter}}" 
+                                                  Command="{Binding FavoriteCommand}"
+                                                  BackgroundColor="Transparent" 
+                                                  ImageTintColor="{Binding IsFavorite, Converter={StaticResource FavoriteTintColorConverter}}"/>
+                            <controls:ImageButton Image="thumbUp" 
+                                                  Command="{Binding PositiveRateCommand}"
+                                                  BackgroundColor="Transparent" 
+                                                  ImageTintColor="{Binding Rate, Converter={StaticResource LikeColorConverter}}" />
+                            <controls:ImageButton Image="thumbDown" 
+                                                  Command="{Binding NegativeRateCommand}"
+                                                  BackgroundColor="Transparent" 
+                                                  ImageTintColor="{Binding Rate, Converter={StaticResource DislikeColorConverter}}"/>
+                        </FlexLayout>
+                        
+                        <ActivityIndicator IsVisible="{Binding IsLoadingDetails}"
+                                           IsRunning="{Binding IsLoadingDetails}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <BoxView Style="{StaticResource SeparatorLineStyle}"/>
+                    <Button Text="Read Reviews" BackgroundColor="Transparent" 
+                            FontSize="12" TextColor="{StaticResource PrimaryColor}"
+                            Command="{Binding ReadReviewsCommand}"/>
+                    <BoxView Style="{StaticResource SeparatorLineStyle}"/>
+                    
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal"
+                             Padding="16,8">
+                    <Label Text="Title" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text="{Binding Movie.Title}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal"
+                             Padding="16,8">
+                    <Label Text="Release Date" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text="{Binding Movie.ReleaseDate, StringFormat='{0:d MMM yyyy}'}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>                
+
+                <StackLayout Padding="16,8"
+                             Spacing="0">
+                    <Label Text="Genres"
+                           HorizontalOptions="StartAndExpand"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.GenreIds, Converter={StaticResource GenresConverter}}" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                             Padding="16,8">
+                    <Label Text="Rate" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text="{Binding Movie.VoteAverage}"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                
+                <StackLayout Padding="16,8" 
+                             Spacing="0">
+                    <Label Text="Overview" 
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Movie.Overview}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

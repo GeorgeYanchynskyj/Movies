@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TMDBMobile.Core.Pages.LoginPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand"
+                     Spacing="12"
+                     Padding="32">
+            <Label Text="The Movie DB"
+                   Font="22"
+                   HorizontalOptions="Center"/>
+            <Entry Placeholder="Username" 
+                   Text="{Binding Username, Mode=TwoWay}"/>
+            <Entry Placeholder="Password" 
+                   Text="{Binding Password}"
+                   IsPassword="True" />
+            
+            <StackLayout Spacing="0">
+                <ActivityIndicator IsVisible="{Binding IsLoggingIn}"
+                                   IsRunning="{Binding IsLoggingIn}"/>
+                <Button Text="Login" 
+                        TextColor="White"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Command="{Binding LoginCommand}"
+                        IsVisible="{Binding IsLoggingIn, Converter={StaticResource InvertBoolConverter}}" />
+            </StackLayout>
+            
+            <Button Text="Get Me Back" TextColor="{StaticResource PrimaryColor}" 
+                    BackgroundColor="Transparent"
+                    Command="{Binding PopCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

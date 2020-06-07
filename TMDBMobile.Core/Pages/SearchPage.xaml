@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TMDBMobile.Core.Pages.SearchPage"
+             xmlns:utils="clr-namespace:TMDBMobile.Core.Utils"
+             Title="Search">
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <SearchBar Placeholder="Type to search..."
+                       Text="{Binding Query}">
+                <SearchBar.Margin>
+                    <OnPlatform x:TypeArguments="Thickness" >
+                        <On Platform="Android" Value="-12,0,0,0" />
+                    </OnPlatform>
+                </SearchBar.Margin>
+            </SearchBar>
+
+            <utils:StateContainer State="{Binding State}" VerticalOptions="FillAndExpand">
+                <utils:StateCondition State="Searching">
+                    <ListView SelectedItem="{Binding SelectedMovie}"
+                              ItemsSource="{Binding Movies}"
+                              ItemAppearing="SearchItemAppearing"
+                              ItemTemplate="{StaticResource SearchResultCell}"
+                              Style="{StaticResource ResultsListStyle}">
+                        <ListView.Footer>
+                            <StackLayout>
+                                <ActivityIndicator HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   IsRunning="{Binding IsSearching}"
+                                                   IsVisible="{Binding IsSearching}" />
+                            </StackLayout>
+                        </ListView.Footer>
+                    </ListView>
+                </utils:StateCondition>
+
+                <utils:StateCondition State="Discover">
+                    <StackLayout>
+                        <Label Text="Discover" HorizontalOptions="Start"
+                               VerticalOptions="Start" Margin="8"
+                               FontSize="24" />
+
+                        <ListView SelectedItem="{Binding SelectedMovie}"
+                                  ItemsSource="{Binding DiscoverMovies}"
+                                  ItemAppearing="DiscoverItemAppearing"
+                                  ItemSelected="Handle_ItemSelected"
+                                  ItemTemplate="{StaticResource SearchResultCell}"
+                                  Style="{StaticResource ResultsListStyle}">
+                            <ListView.Footer>
+                                <StackLayout>
+                                    <ActivityIndicator HorizontalOptions="Center"
+                                                       VerticalOptions="Center"
+                                                       IsRunning="{Binding IsSearching}"
+                                                       IsVisible="{Binding IsSearching}" />
+                                </StackLayout>
+                            </ListView.Footer>
+                        </ListView>
+                    </StackLayout>
+                </utils:StateCondition>
+
+                <utils:StateCondition State="Empty">
+                    <Label Text="Nothing was found" FontSize="32" 
+                           HorizontalOptions="Center" VerticalOptions="Start" Margin="0,16,0,0"/>
+                </utils:StateCondition>
+            </utils:StateContainer>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
