@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMDBMobile.Core.Model;
 using TMDBMobile.Core.Services;
+using Sourcer;
+//using RestSharp;
 
 namespace ConsoleInterface
 {
@@ -16,6 +18,8 @@ namespace ConsoleInterface
             //var res = serv.Discover().GetAwaiter().GetResult();
 
             var list = Discover();//.GetAwaiter().GetResult();
+
+            //var list = Sourcer.Sourcer.Discover0();
 
             foreach (Movie m in list)
             {
@@ -38,5 +42,6 @@ namespace ConsoleInterface
 
             return res.Data.Results;
         }
+
     }
 }

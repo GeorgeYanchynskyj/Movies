@@ -14,15 +14,16 @@ namespace Sourcer
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
-            {
-                new Sourcer()
-            };
-            ServiceBase.Run(ServicesToRun);
+            //ServiceBase[] ServicesToRun;
+            //ServicesToRun = new ServiceBase[]
+            //{
+            //    new Sourcer()
+            //};
+            //ServiceBase.Run(ServicesToRun);
 
             Sourcer s = new Sourcer();
-            
+
+            s.Publish();
         }
     }
 }

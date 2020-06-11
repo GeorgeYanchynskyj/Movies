@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sourcer\Sourcer.csproj" />
     <ProjectReference Include="..\TMDBMobile.Core\TMDBMobile.Core.csproj" />
   </ItemGroup>
 
