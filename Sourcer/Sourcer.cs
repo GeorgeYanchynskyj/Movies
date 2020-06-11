@@ -83,7 +83,7 @@ namespace Sourcer
 
         private void Log(string mess)
         {
-            using (StreamWriter outputFile = File.AppendText($@"C:\Users\yurij\Desktop\Log.txt")) outputFile.WriteLine(mess);
+            using (StreamWriter outputFile = File.AppendText($@"C:\Users\yurij\Desktop\SourcerLog.txt")) outputFile.WriteLine(mess);
         }
         protected override void OnStop()
         {
