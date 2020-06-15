@@ -25,9 +25,11 @@ namespace Sourcer
         protected override void OnStart(string[] args)
         {
             Timer timer = new Timer();
-            timer.Interval = 6000; // 60 seconds
+            timer.Interval = 1000; // 60 seconds
             timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
             timer.Start();
+
+            //Log("Got data from source");
         }
         public void OnTimer(object sender, ElapsedEventArgs args)
         {
@@ -66,6 +68,8 @@ namespace Sourcer
                                          basicProperties: null,
                                          body: body);
                 }
+
+                Log("Published");
             }
         }
 

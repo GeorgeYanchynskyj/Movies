@@ -14,12 +14,16 @@ namespace Listener
         /// </summary>
         static void Main()
         {
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
-            {
-                new Listener()
-            };
-            ServiceBase.Run(ServicesToRun);
+            //ServiceBase[] ServicesToRun;
+            //ServicesToRun = new ServiceBase[]
+            //{
+            //    new Listener()
+            //};
+            //ServiceBase.Run(ServicesToRun);
+
+            var s = new Listener();
+
+            s.Listen();
         }
     }
 }
