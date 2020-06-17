@@ -112,6 +112,20 @@ namespace DAL.Tablers
             return res > 0;
         }
 
+        public bool LikeMovie(string title, int userId)
+        {
+            IDbCommand command = _dbConnection.CreateCommand();
+            command.CommandText = $"EXEC dbo.LikeMovie @UserId={userId}, @Title='{title.Replace("'", "`")}' "; //{movie.ReleaseDate}"; 2020-01-01
+
+            _dbConnection.Open();
+
+            var res = command.ExecuteNonQuery();
+
+            _dbConnection.Close();
+
+            return res > 0;
+        }
+
         //public bool InsertBook(Movie movie)
         //{
         //    IDbCommand command = _dbConnection.CreateCommand();
